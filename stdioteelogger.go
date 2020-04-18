@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"io"
 	"log"
 	"os"
@@ -31,7 +30,7 @@ func main() {
 	log.SetFlags(log.Lmicroseconds)
 	log.SetOutput(f)
 
-	exe := exec.Command(flag.Arg(0), flag.Args()[1:]...)
+	exe := exec.Command(os.Args[0], os.Args[1:]...)
 	exeStdout, _ := exe.StdoutPipe()
 	exeStdin, _ := exe.StdinPipe()
 	exeStderr, _ := exe.StderrPipe()
