@@ -1,5 +1,13 @@
 # Stdio Tee Logger
 
+## install
+
+```
+go get github.com/74th/stdio-tee-logger
+```
+
+## how to use
+
 prog1 --execute command-> prog2
 
 prog1 --execute-> Logger --execute-> prog2
