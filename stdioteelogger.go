@@ -30,7 +30,7 @@ func main() {
 	log.SetFlags(log.Lmicroseconds)
 	log.SetOutput(f)
 
-	exe := exec.Command(os.Args[0], os.Args[1:]...)
+	exe := exec.Command(os.Args[1], os.Args[2:]...)
 	exeStdout, _ := exe.StdoutPipe()
 	exeStdin, _ := exe.StdinPipe()
 	exeStderr, _ := exe.StderrPipe()
@@ -50,16 +50,12 @@ func main() {
 			bufio.NewReader(io.TeeReader(os.Stdin, exeStdin)),
 		},
 		{
-			">E",
-			bufio.NewReader(os.Stderr),
-		},
-		{
 			"<",
 			bufio.NewReader(io.TeeReader(exeStdout, os.Stdout)),
 		},
 		{
-			"<E",
-			bufio.NewReader(exeStderr),
+			"E<",
+			bufio.NewReader(io.TeeReader(exeStderr, os.Stderr)),
 		},
 	}
 
